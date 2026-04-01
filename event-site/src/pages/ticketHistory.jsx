@@ -9,7 +9,7 @@ import line4 from "./line-4.svg";
 import rectangle54 from "./rectangle-54.svg";
 import rectangle56 from "./rectangle-56.svg";
 import rectangle57 from "./rectangle-57.svg";
-import "./TicketHistory.css";
+import "./ticketHistory.css";
  
 export const TicketHistory = () => {
   return (
