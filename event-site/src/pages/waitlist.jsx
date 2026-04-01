@@ -1,4 +1,5 @@
-import "./TicketWaitlist.css";
+import "<div className="" />
+<w></w>aitlist.css";
  
 export const TicketWaitlist = () => {
   return (
