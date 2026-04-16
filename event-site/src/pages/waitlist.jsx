@@ -1,5 +1,5 @@
-import "<div className="" />
-<w></w>aitlist.css";
+import React from 'react'
+import './waitlist.css'
  
 export const TicketWaitlist = () => {
   return (
@@ -50,3 +50,4 @@ export const TicketWaitlist = () => {
     </div>
   );
 };
+export default TicketWaitlist;

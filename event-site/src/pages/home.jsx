@@ -1,5 +1,5 @@
 import "./homepagedesktop.css";
-import logo from "./event_horizon_logo.png";
+//import logo from "./event_horizon_logo.png";
 
 export const Frame = () => {
     return (
@@ -34,4 +34,6 @@ export const Frame = () => {
             </div>
         </div>
     );
+    
 };
+export default Frame

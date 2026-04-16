@@ -1,5 +1,5 @@
 import "./homemobile.css";
-import logo from "./event_horizon_logo.png";
+import logo from "../assets/event_horizon_logo.png";
 
 export const HomePageForMobile = () => {
     return (
@@ -75,3 +75,4 @@ export const HomePageForMobile = () => {
         </div>
     );
 };
+export default HomePageForMobile

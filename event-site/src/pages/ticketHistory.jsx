@@ -1,14 +1,14 @@
-import ellipse8 from "./ellipse-8.png";
-import icon4 from "./icon-4.png";
-import icon5 from "./icon-5.png";
-import icon6 from "./icon-6.png";
-import line1 from "./line-1.svg";
-import line2 from "./line-2.svg";
-import line3 from "./line-3.svg";
-import line4 from "./line-4.svg";
-import rectangle54 from "./rectangle-54.svg";
-import rectangle56 from "./rectangle-56.svg";
-import rectangle57 from "./rectangle-57.svg";
+//import ellipse8 from "./ellipse-8.png";
+//import icon4 from "./icon-4.png";
+//import icon5 from "./icon-5.png";
+//import icon6 from "./icon-6.png";
+//import line1 from "./line-1.svg";
+//import line2 from "./line-2.svg";
+//import line3 from "./line-3.svg";
+//import line4 from "./line-4.svg";
+//import rectangle54 from "./rectangle-54.svg";
+//import rectangle56 from "./rectangle-56.svg";
+//import rectangle57 from "./rectangle-57.svg";
 import "./ticketHistory.css";
  
 export const TicketHistory = () => {
@@ -94,3 +94,4 @@ export const TicketHistory = () => {
     </div>
   );
 };
+export default TicketHistory
