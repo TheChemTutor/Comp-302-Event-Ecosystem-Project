@@ -4,7 +4,7 @@ import { getAllEvents } from '../../database/collections/events'
 import Navbar from '../components/Navbar'
 import "./homepagedesktop.css"
 
-const CATEGORIES = ['All', 'Music', 'Tech', 'Sports', 'Food', 'Arts']
+const CATEGORIES = ['All', 'Music', 'Tech', 'Sports', 'Food', 'Arts', 'Networking']
 
 export const HomePage = () => {
   const navigate = useNavigate()
@@ -18,8 +18,9 @@ export const HomePage = () => {
     const fetchEvents = async () => {
       try {
         const data = await getAllEvents()
-        setEvents(data)
-        setFiltered(data)
+        const publicEvents = data.filter(e => e.visibility !== 'Private')
+        setEvents(publicEvents)
+        setFiltered(publicEvents)
       } catch (err) {
         console.error('Failed to fetch events:', err)
       } finally {
@@ -38,22 +39,30 @@ export const HomePage = () => {
     setSearch(e.target.value)
     filterEvents(activeCategory, e.target.value)
   }
+
   const handleSearchSubmit = () => {
-  navigate(`/search?q=${search}`)
-}
+    navigate(`/search?q=${search}`)
+  }
 
   const filterEvents = (category, searchTerm) => {
     let results = events
     if (category !== 'All') {
-      results = results.filter(e => e.category === category)
+      results = results.filter(e =>
+        e.category?.toLowerCase() === category.toLowerCase()
+      )
     }
     if (searchTerm.trim()) {
       results = results.filter(e =>
-        e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        e.venue.toLowerCase().includes(searchTerm.toLowerCase())
+        e.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        e.venue?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
     setFiltered(results)
+  }
+
+  const isPast = (event) => {
+    if (!event.startDate) return false
+    return new Date(event.startDate) < new Date()
   }
 
   return (
@@ -102,26 +111,31 @@ export const HomePage = () => {
                 onClick={() => navigate(`/events/${event.id}`)}
               >
                 <div className={`event-img event-img-${event.category?.toLowerCase() || 'default'}`}>
-                  {event.flyerUrl ? (
-                    <img src={event.flyerUrl} alt={event.title} />
-                  ) : null}
+                  {event.flyerUrl && (
+                    <img
+                      src={event.flyerUrl}
+                      alt={event.title}
+                      onError={(e) => { e.target.style.display = 'none' }}
+                    />
+                  )}
                   <span className="event-tag">{event.category}</span>
                 </div>
                 <div className="event-body">
                   <p className="event-name">{event.title}</p>
-                  <p className="event-meta">{event.date} · {event.venue}</p>
+                  <p className="event-meta">{event.startDate} · {event.venue}</p>
                   <div className="event-footer">
                     <span className="event-price">
-                      {event.price === 0 ? 'Free' : `P${event.price}`}
+                      {!event.price || Number(event.price) === 0 ? 'Free' : `P${event.price}`}
                     </span>
                     <button
-                      className="event-reg-btn"
+                      className={`event-reg-btn ${isPast(event) ? 'event-reg-btn-past' : ''}`}
                       onClick={(e) => {
                         e.stopPropagation()
                         navigate(`/events/${event.id}`)
                       }}
+                      disabled={isPast(event)}
                     >
-                      Register
+                      {isPast(event) ? 'Past' : 'Register'}
                     </button>
                   </div>
                 </div>

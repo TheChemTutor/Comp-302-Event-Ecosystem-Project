@@ -158,3 +158,25 @@
   margin-top: 12px;
   font-family: 'DM Sans', sans-serif;
 }
+.th-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.th-cancel-btn {
+  background: #fcebeb;
+  color: #a32d2d;
+  border: 0.5px solid #f09595;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.th-cancel-btn:hover {
+  background: #f7c1c1;
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../../database/firebaseConfig'
-import { ref, get } from 'firebase/database'
+import { ref, get, remove } from 'firebase/database'
 import { onAuthStateChanged } from 'firebase/auth'
 import Navbar from '../components/Navbar'
 import './ticketHistory.css'
@@ -14,7 +14,6 @@ export default function TicketHistory() {
   const [events, setEvents] = useState({})
   const [activeTab, setActiveTab] = useState('Upcoming')
   const [loading, setLoading] = useState(true)
-  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (u) => {
@@ -22,7 +21,6 @@ export default function TicketHistory() {
         navigate('/login')
         return
       }
-      setUser(u)
       await fetchTickets(u.uid)
     })
     return () => unsubscribe()
@@ -61,7 +59,19 @@ export default function TicketHistory() {
   const isUpcoming = (ticket) => {
     const event = getEventForTicket(ticket)
     if (!event) return false
-    return new Date(event.date) >= new Date()
+    const dateStr = event.startDate || event.date
+    return new Date(dateStr) >= new Date()
+  }
+
+  const cancelTicket = async (ticketId) => {
+    if (!window.confirm('Are you sure you want to cancel this ticket? This cannot be undone.')) return
+    try {
+      await remove(ref(db, 'tickets/' + ticketId))
+      setTickets(prev => prev.filter(t => t.id !== ticketId))
+    } catch (err) {
+      console.error('Failed to cancel ticket:', err)
+      alert('Failed to cancel ticket. Please try again.')
+    }
   }
 
   const filteredTickets = tickets.filter(ticket => {
@@ -77,6 +87,7 @@ export default function TicketHistory() {
       Sports: 'linear-gradient(135deg, #1a1200, #4a3800)',
       Food: 'linear-gradient(135deg, #854f0b, #ba7517)',
       Arts: 'linear-gradient(135deg, #3a1a00, #7a3a00)',
+      Networking: 'linear-gradient(135deg, #0f4c75, #1b6ca8)',
     }
     return colors[category] || 'linear-gradient(135deg, #6b5200, #c4a882)'
   }
@@ -111,9 +122,11 @@ export default function TicketHistory() {
         ) : filteredTickets.length === 0 ? (
           <div className="th-empty">
             <p>No {activeTab.toLowerCase()} tickets</p>
-            <button className="th-browse-btn" onClick={() => navigate('/')}>
-              Browse events
-            </button>
+            {activeTab === 'Upcoming' && (
+              <button className="th-browse-btn" onClick={() => navigate('/')}>
+                Browse events
+              </button>
+            )}
           </div>
         ) : (
           <div className="th-list">
@@ -128,24 +141,34 @@ export default function TicketHistory() {
                   <div className="th-info">
                     <p className="th-event-name">{event?.title || 'Unknown Event'}</p>
                     <p className="th-event-meta">
-                      {event?.date} · {event?.venue} · {ticket.ticketType}
+                      {event?.startDate || event?.date} · {event?.venue} · {ticket.ticketType}
                     </p>
                   </div>
                   <div className="th-right">
                     <p className="th-price">
-                      {ticket.price === 0 ? 'Free' : `P${ticket.price}`}
+                      {!ticket.price || ticket.price === 0 ? 'Free' : `P${ticket.price}`}
                     </p>
                     <p className="th-ref">{ticket.id?.slice(0, 8).toUpperCase()}</p>
                     <span className={`th-badge ${activeTab === 'Upcoming' ? 'th-badge-upcoming' : 'th-badge-past'}`}>
                       {activeTab === 'Upcoming' ? 'Upcoming' : 'Attended'}
                     </span>
                   </div>
-                  <button
-                    className="th-view-btn"
-                    onClick={() => navigate(`/ticket/${ticket.id}`)}
-                  >
-                    View ticket
-                  </button>
+                  <div className="th-actions">
+                    <button
+                      className="th-view-btn"
+                      onClick={() => navigate(`/ticket/${ticket.id}`)}
+                    >
+                      View ticket
+                    </button>
+                    {activeTab === 'Upcoming' && (
+                      <button
+                        className="th-cancel-btn"
+                        onClick={() => cancelTicket(ticket.id)}
+                      >
+                        Cancel
+                      </button>
+                    )}
+                  </div>
                 </div>
               )
             })}

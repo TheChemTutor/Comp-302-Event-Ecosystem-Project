@@ -254,3 +254,17 @@
   font-size: 13px;
   cursor: pointer;
 }
+.search-bar input::placeholder {
+  color: #6b5200;
+  opacity: 0.7;
+}
+
+.price-input::placeholder {
+  color: #6b5200;
+  opacity: 0.7;
+}
+
+.result-past {
+  background: #f0ede0;
+  color: #6b5200;
+}

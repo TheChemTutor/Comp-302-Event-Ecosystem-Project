@@ -4,7 +4,7 @@ import { getAllEvents } from '../../database/collections/events'
 import Navbar from '../components/Navbar'
 import './search.css'
 
-const CATEGORIES = ['All', 'Music', 'Tech', 'Sports', 'Food', 'Arts']
+const CATEGORIES = ['All', 'Music', 'Tech', 'Sports', 'Food', 'Arts', 'Networking']
 
 function Search() {
   const navigate = useNavigate()
@@ -19,8 +19,9 @@ function Search() {
     const fetchEvents = async () => {
       try {
         const data = await getAllEvents()
-        setEvents(data)
-        setFiltered(data)
+        const publicEvents = data.filter(e => e.visibility !== 'Private')
+        setEvents(publicEvents)
+        setFiltered(publicEvents)
       } catch (err) {
         console.error('Failed to fetch events:', err)
       } finally {
@@ -30,23 +31,25 @@ function Search() {
     fetchEvents()
   }, [])
 
-  const applyFilters = (searchTerm, category, price) => {
-    let results = events
+  const applyFilters = (searchTerm, category, price, baseEvents) => {
+    let results = baseEvents || events
 
     if (searchTerm.trim()) {
       results = results.filter(e =>
-        e.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        e.venue.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        e.category.toLowerCase().includes(searchTerm.toLowerCase())
+        e.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        e.venue?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        e.category?.toLowerCase().includes(searchTerm.toLowerCase())
       )
     }
 
     if (category !== 'All') {
-      results = results.filter(e => e.category === category)
+      results = results.filter(e =>
+        e.category?.toLowerCase() === category.toLowerCase()
+      )
     }
 
-    if (price !== '' && !isNaN(price)) {
-      results = results.filter(e => e.price <= Number(price))
+    if (price !== '' && !isNaN(price) && Number(price) >= 0) {
+      results = results.filter(e => Number(e.price) <= Number(price))
     }
 
     setFiltered(results)
@@ -63,8 +66,9 @@ function Search() {
   }
 
   const handlePrice = (e) => {
-    setMaxPrice(e.target.value)
-    applyFilters(search, activeCategory, e.target.value)
+    const val = Math.max(0, Number(e.target.value))
+    setMaxPrice(val === 0 && e.target.value === '' ? '' : String(val))
+    applyFilters(search, activeCategory, String(val))
   }
 
   const clearFilters = () => {
@@ -78,7 +82,6 @@ function Search() {
     <div>
       <Navbar />
       <div className="search-page">
-
         <div className="search-top">
           <div className="search-bar">
             <input
@@ -87,7 +90,9 @@ function Search() {
               value={search}
               onChange={handleSearch}
             />
-            <button className="search-btn">Search</button>
+            <button className="search-btn" onClick={() => applyFilters(search, activeCategory, maxPrice)}>
+              Search
+            </button>
           </div>
           <div className="search-chips">
             {activeCategory !== 'All' && (
@@ -96,7 +101,7 @@ function Search() {
             {maxPrice && (
               <span className="chip chip-active">Under P{maxPrice}</span>
             )}
-            {(activeCategory !== 'All' || maxPrice) && (
+            {(activeCategory !== 'All' || maxPrice || search) && (
               <span className="chip chip-clear" onClick={clearFilters}>Clear all</span>
             )}
           </div>
@@ -109,7 +114,9 @@ function Search() {
               {CATEGORIES.map(cat => (
                 <div key={cat} className="cb-row" onClick={() => handleCategory(cat)}>
                   <div className={`cb ${activeCategory === cat ? 'cb-checked' : ''}`}></div>
-                  <span className={`cb-label ${activeCategory === cat ? 'cb-label-active' : ''}`}>{cat}</span>
+                  <span className={`cb-label ${activeCategory === cat ? 'cb-label-active' : ''}`}>
+                    {cat}
+                  </span>
                 </div>
               ))}
             </div>
@@ -121,6 +128,7 @@ function Search() {
                 className="price-input"
                 placeholder="e.g. 200"
                 value={maxPrice}
+                min="0"
                 onChange={handlePrice}
               />
             </div>
@@ -145,17 +153,25 @@ function Search() {
                     onClick={() => navigate(`/events/${event.id}`)}
                   >
                     <div className={`result-img event-img-${event.category?.toLowerCase() || 'default'}`}>
-                      {event.flyerUrl && <img src={event.flyerUrl} alt={event.title} />}
+                      {event.flyerUrl && (
+                        <img
+                          src={event.flyerUrl}
+                          alt={event.title}
+                          onError={(e) => { e.target.style.display = 'none' }}
+                        />
+                      )}
                       <span className="result-tag">{event.category}</span>
                     </div>
                     <div className="result-body">
                       <p className="result-name">{event.title}</p>
-                      <p className="result-meta">{event.date} · {event.venue}</p>
+                      <p className="result-meta">{event.startDate} · {event.venue}</p>
                       <div className="result-footer">
                         <span className="result-price">
-                          {event.price === 0 ? 'Free' : `P${event.price}`}
+                          {!event.price || Number(event.price) === 0 ? 'Free' : `P${event.price}`}
                         </span>
-                        <span className="result-available">Available</span>
+                        <span className={`result-available ${event.startDate && new Date(event.startDate) < new Date() ? 'result-past' : ''}`}>
+                          {event.startDate && new Date(event.startDate) < new Date() ? 'Past' : 'Available'}
+                        </span>
                       </div>
                     </div>
                   </div>
