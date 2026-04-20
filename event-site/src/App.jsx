@@ -10,11 +10,17 @@ import Search from './pages/search'
 import NotFound from './pages/notFound'
 import Notifications from './pages/notifications'
 
+import Dashboard from './pages/host/dashboard'
+import CreateEvent from './pages/host/createEvent'
+import EditEvent from './pages/host/editEvent'
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/host/edit/:id" element={<EditEvent />} />
+        <Route path="/host/create" element={<CreateEvent />} />
         <Route path="/home-mobile" element={<HomePageForMobile />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -24,6 +30,7 @@ function App() {
         <Route path="/waitlist" element={<Waitlist />} />
         <Route path="/notifications" element={<Notifications />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/host/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   )

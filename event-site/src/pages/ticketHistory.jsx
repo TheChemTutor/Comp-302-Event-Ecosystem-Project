@@ -1,97 +1,157 @@
-//import ellipse8 from "./ellipse-8.png";
-//import icon4 from "./icon-4.png";
-//import icon5 from "./icon-5.png";
-//import icon6 from "./icon-6.png";
-//import line1 from "./line-1.svg";
-//import line2 from "./line-2.svg";
-//import line3 from "./line-3.svg";
-//import line4 from "./line-4.svg";
-//import rectangle54 from "./rectangle-54.svg";
-//import rectangle56 from "./rectangle-56.svg";
-//import rectangle57 from "./rectangle-57.svg";
-import "./ticketHistory.css";
- 
-export const TicketHistory = () => {
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { auth, db } from '../../database/firebaseConfig'
+import { ref, get } from 'firebase/database'
+import { onAuthStateChanged } from 'firebase/auth'
+import Navbar from '../components/Navbar'
+import './ticketHistory.css'
+
+const TABS = ['Upcoming', 'Past', 'Waitlisted']
+
+export default function TicketHistory() {
+  const navigate = useNavigate()
+  const [tickets, setTickets] = useState([])
+  const [events, setEvents] = useState({})
+  const [activeTab, setActiveTab] = useState('Upcoming')
+  const [loading, setLoading] = useState(true)
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (u) => {
+      if (!u) {
+        navigate('/login')
+        return
+      }
+      setUser(u)
+      await fetchTickets(u.uid)
+    })
+    return () => unsubscribe()
+  }, [])
+
+  const fetchTickets = async (userId) => {
+    try {
+      const ticketsSnap = await get(ref(db, 'tickets'))
+      const eventsSnap = await get(ref(db, 'events'))
+
+      let userTickets = []
+      if (ticketsSnap.exists()) {
+        userTickets = Object.entries(ticketsSnap.val())
+          .filter(([id, t]) => t.userId === userId)
+          .map(([id, t]) => ({ id, ...t }))
+      }
+
+      let eventsMap = {}
+      if (eventsSnap.exists()) {
+        eventsMap = eventsSnap.val()
+      }
+
+      setTickets(userTickets)
+      setEvents(eventsMap)
+    } catch (err) {
+      console.error('Failed to fetch tickets:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const getEventForTicket = (ticket) => {
+    return events[ticket.eventId] || null
+  }
+
+  const isUpcoming = (ticket) => {
+    const event = getEventForTicket(ticket)
+    if (!event) return false
+    return new Date(event.date) >= new Date()
+  }
+
+  const filteredTickets = tickets.filter(ticket => {
+    if (activeTab === 'Upcoming') return isUpcoming(ticket)
+    if (activeTab === 'Past') return !isUpcoming(ticket)
+    return false
+  })
+
+  const getCategoryColor = (category) => {
+    const colors = {
+      Music: 'linear-gradient(135deg, #ff6b00, #ffb347)',
+      Tech: 'linear-gradient(135deg, #ffd600, #ff6b00)',
+      Sports: 'linear-gradient(135deg, #1a1200, #4a3800)',
+      Food: 'linear-gradient(135deg, #854f0b, #ba7517)',
+      Arts: 'linear-gradient(135deg, #3a1a00, #7a3a00)',
+    }
+    return colors[category] || 'linear-gradient(135deg, #6b5200, #c4a882)'
+  }
+
   return (
-    <div className="ticket-history">
-      <div className="rectangle" />
- 
-      <div className="text-wrapper">Logo here</div>
- 
-      <div className="div">Upcoming (2)</div>
- 
-      <div className="text-wrapper-2">Past (4)</div>
- 
-      <div className="text-wrapper-3">Waitlisted (1)</div>
- 
-      <img className="img" alt="Rectangle" src={rectangle54} />
- 
-      <div className="text-wrapper-4">VYB-00612</div>
- 
-      <div className="text-wrapper-5">P350</div>
- 
-      <p className="p">Wed 31 Dec · Gaborone CBD · VIP</p>
- 
-      <div className="text-wrapper-6">New Year Bash 2025</div>
- 
-      <div className="text-wrapper-7">VYB-00863</div>
- 
-      <div className="text-wrapper-8">Free</div>
- 
-      <p className="text-wrapper-9">Fri 3 Apr · BIUST Campus · Standard</p>
- 
-      <div className="text-wrapper-10">VYB-00841</div>
- 
-      <div className="text-wrapper-11">P120</div>
- 
-      <p className="text-wrapper-12">
-        Sat 28 Mar · Gaborone Showgrounds · General Admission
-      </p>
- 
-      <div className="text-wrapper-13">AfroFest 2026</div>
- 
-      <img className="rectangle-2" alt="Rectangle" src={rectangle56} />
- 
-      <div className="text-wrapper-14">BIUST Hackathon</div>
- 
-      <img className="rectangle-3" alt="Rectangle" src={rectangle57} />
- 
-      <div className="rectangle-4" />
- 
-      <div className="rectangle-5" />
- 
-      <div className="rectangle-6" />
- 
-      <div className="rectangle-7" />
- 
-      <div className="text-wrapper-15">Upcoming</div>
- 
-      {/* NOTE: text-wrapper-16 has no CSS defined — add styles in TicketHistory.css */}
-      <div className="text-wrapper-16">Upcoming</div>
- 
-      <div className="rectangle-8" />
- 
-      <div className="rectangle-9" />
- 
-      <div className="rectangle-10" />
- 
-      <div className="text-wrapper-17">Attended</div>
- 
-      <img className="line" alt="Line" src={line1} />
- 
-      <img className="line-2" alt="Line" src={line2} />
- 
-      <img className="line-3" alt="Line" src={line3} />
- 
-      {/* NOTE: icon, icon-2 are off-screen in CSS (left: -1515px). Fix positions in TicketHistory.css */}
-      <img className="icon" alt="Icon" src={icon4} />
-      <img className="icon-2" alt="Icon" src={icon5} />
-      <img className="icon-2" alt="Icon" src={icon6} />
- 
-      <img className="line-4" alt="Line" src={line4} />
- 
-      <img className="ellipse" alt="Ellipse" src={ellipse8} />
+    <div>
+      <Navbar />
+      <div className="th-page">
+        <h1 className="th-title">My Tickets</h1>
+
+        <div className="th-tabs">
+          {TABS.map(tab => (
+            <button
+              key={tab}
+              className={`th-tab ${activeTab === tab ? 'th-tab-active' : ''}`}
+              onClick={() => setActiveTab(tab)}
+            >
+              {tab}
+              {tab !== 'Waitlisted' && (
+                <span className="th-tab-count">
+                  {tab === 'Upcoming'
+                    ? tickets.filter(t => isUpcoming(t)).length
+                    : tickets.filter(t => !isUpcoming(t)).length}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+
+        {loading ? (
+          <p className="th-loading">Loading your tickets...</p>
+        ) : filteredTickets.length === 0 ? (
+          <div className="th-empty">
+            <p>No {activeTab.toLowerCase()} tickets</p>
+            <button className="th-browse-btn" onClick={() => navigate('/')}>
+              Browse events
+            </button>
+          </div>
+        ) : (
+          <div className="th-list">
+            {filteredTickets.map(ticket => {
+              const event = getEventForTicket(ticket)
+              return (
+                <div key={ticket.id} className="th-item">
+                  <div
+                    className="th-thumb"
+                    style={{ background: getCategoryColor(event?.category) }}
+                  ></div>
+                  <div className="th-info">
+                    <p className="th-event-name">{event?.title || 'Unknown Event'}</p>
+                    <p className="th-event-meta">
+                      {event?.date} · {event?.venue} · {ticket.ticketType}
+                    </p>
+                  </div>
+                  <div className="th-right">
+                    <p className="th-price">
+                      {ticket.price === 0 ? 'Free' : `P${ticket.price}`}
+                    </p>
+                    <p className="th-ref">{ticket.id?.slice(0, 8).toUpperCase()}</p>
+                    <span className={`th-badge ${activeTab === 'Upcoming' ? 'th-badge-upcoming' : 'th-badge-past'}`}>
+                      {activeTab === 'Upcoming' ? 'Upcoming' : 'Attended'}
+                    </span>
+                  </div>
+                  <button
+                    className="th-view-btn"
+                    onClick={() => navigate(`/ticket/${ticket.id}`)}
+                  >
+                    View ticket
+                  </button>
+                </div>
+              )
+            })}
+          </div>
+        )}
+      </div>
     </div>
-  );
-};
-export default TicketHistory
+  )
+}

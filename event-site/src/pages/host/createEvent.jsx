@@ -1,199 +1,264 @@
-import logoImg from "./event_horizon_logo.png";
-import ellipse18982 from "./ellipse-1898-2.svg";
-import ellipse1898 from "./ellipse-1898.svg";
-import ellipse18992 from "./ellipse-1899-2.svg";
-import ellipse1899 from "./ellipse-1899.svg";
-import location from "./location.png";
-import path2 from "./path-2.svg";
-import path from "./path.svg";
-import rectangle7 from "./rectangle-7.svg";
-import sound1048861 from "./sound-104886-1.svg";
-import "./EventCreationHost.css";
-import vector8 from "./vector-8.svg";
-import vector9 from "./vector-9.svg";
-import vector3352 from "./vector-335-2.svg";
-import vector335 from "./vector-335.svg";
- 
-import { ArrowLeft } from "./ArrowLeft";
- 
-export const EventCreationHost = () => {
-    return (
-        <div className="event-creation-host">
- 
-            {/* ── Top nav bar ── */}
-            <div className="rectangle-7" />
- 
-            {/* UPDATED: logo image replaces "LogoHere" text */}
-            <img className="logo" alt="Event Horizon" src={logoImg} />
- 
-            <div className="text-wrapper-14">Host Dashboard</div>
-            <div className="text-wrapper-15">About</div>
- 
-            <ArrowLeft className="arrow-left-instance" />
- 
-            {/* ── Page title ── */}
-            <div className="text-wrapper-3">Create a new Event</div>
- 
-            {/* ── LEFT COLUMN ── */}
- 
-            <div className="input-field">
-                <label className="label" htmlFor="input-1">
-                    Event name
-                </label>
-                <input
-                    className="input"
-                    id="input-1"
-                    placeholder="Name of event"
-                    type="text"
-                />
-            </div>
- 
-            <div className="input-field-3">
-                <div className="label">Venue / Location</div>
-                <div className="value-wrapper">
-                    <img className="location" alt="Location" src={location} />
-                    <div className="value">Location</div>
-                </div>
-            </div>
- 
-            <div className="input-field-7">
-                <div className="label">Start Date</div>
-                <div className="input-4">
-                    <div className="value-2">DD/MM/YY</div>
-                </div>
-            </div>
- 
-            <div className="input-field-8">
-                <div className="label">Start Time</div>
-                <div className="input-5">
-                    <div className="value">09:00 AM</div>
-                </div>
-            </div>
- 
-            <div className="input-field-10">
-                <div className="label-text-wrapper">
-                    <div className="label-text">Category</div>
-                </div>
-                <div className="input-field-11">
-                    <div className="lead-icon-text">
-                        <div className="vector-wrapper">
-                            <img className="vector-6" alt="Vector" src={vector8} />
-                        </div>
-                        <div className="cursor-text">
-                            <div className="insert-text-here">Insert Category</div>
-                        </div>
-                    </div>
-                    <div className="vector-wrapper">
-                        <img className="vector-7" alt="Vector" src={vector335} />
-                    </div>
-                </div>
-            </div>
- 
-            <div className="input-field-12">
-                <div className="label-text-wrapper">
-                    <div className="label-text">Visibility</div>
-                </div>
-                <div className="input-field-11">
-                    <div className="lead-icon-text">
-                        <div className="vector-wrapper">
-                            <img className="vector-6" alt="Vector" src={vector9} />
-                        </div>
-                        <div className="cursor-text">
-                            <div className="insert-text-here">Public</div>
-                        </div>
-                    </div>
-                    <div className="vector-wrapper">
-                        <img className="vector-7" alt="Vector" src={vector3352} />
-                    </div>
-                </div>
-            </div>
- 
-            <div className="input-field-2">
-                <div className="label">Description of event</div>
-                <div className="input-2" />
-            </div>
- 
-            <div className="input-field-4">
-                <div className="label">Capacity</div>
-                <div className="input-3">
-                    <div className="value">200</div>
-                </div>
-            </div>
- 
-            <div className="input-field-6">
-                <div className="label">End Date</div>
-                <div className="input-4">
-                    <div className="value-2">DD/MM/YY</div>
-                </div>
-            </div>
- 
-            <div className="input-field-9">
-                <div className="label">End Time</div>
-                <div className="input-5">
-                    <div className="value">09:00 AM</div>
-                </div>
-            </div>
- 
-            {/* ── RIGHT COLUMN ── */}
- 
-            <div className="input-field-5">
-                <div className="label">Event Flyer</div>
-            </div>
- 
-            <div className="uploader">
-                <img className="sound" alt="Sound" src={sound1048861} />
-                <div className="drag-and-drop">
-                    <p className="drag-and-drop-title">Drag and drop your files</p>
-                    <p className="text-wrapper">
-                        JPEG, PNG, PDF, and MP4 formats, up to 50MB
-                    </p>
-                </div>
-                <button className="btn">
-                    <div className="element-up-from-yesterd">Select File</div>
-                </button>
-            </div>
- 
-            <div className="inputs">
-                <div className="label-2">or upload from URL</div>
-                <div className="content-wrapper">
-                    <div className="URL-input-container">
-                        <div className="placeholder">Add file URL</div>
-                    </div>
-                    <button className="element-up-from-yesterd-wrapper">
-                        <div className="element-up-from-yesterd">Upload</div>
-                    </button>
-                </div>
-            </div>
- 
-            <div className="label-wrapper">
-                <div className="label">Ticket Types</div>
-            </div>
- 
-            <div className="div-wrapper">
-                <div className="text-wrapper-2">General ticket</div>
-            </div>
- 
-            <p className="add-ticket-type">+ Add ticket type</p>
- 
-            <div className="elements-3">
-                <img className="ellipse" alt="Ellipse" src={ellipse1898} />
-                <img className="path" alt="Path" src={path} />
-                <img className="ellipse-2" alt="Ellipse" src={ellipse1899} />
-            </div>
- 
-            <div className="elements-4">
-                <img className="ellipse" alt="Ellipse" src={ellipse18982} />
-                <img className="path" alt="Path" src={path2} />
-                <img className="ellipse-2" alt="Ellipse" src={ellipse18992} />
-            </div>
- 
-            <div className="button-group-2">
-                <div className="text-wrapper-11">Publish event</div>
-            </div>
-            <div className="button-group">
-                <div className="text-wrapper-12">Save as Draft</div>
-            </div>
- 
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { ref, push, set } from 'firebase/database'
+import { auth, db } from '../../../database/firebaseConfig'
+import Navbar from '../../components/Navbar'
+import './createEvent.css'
+
+const CATEGORIES = ['Music', 'Tech', 'Sports', 'Food', 'Arts', 'Networking']
+
+export default function CreateEvent() {
+  const navigate = useNavigate()
+
+  const [formData, setFormData] = useState({
+    title: '',
+    venue: '',
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: '',
+    category: '',
+    visibility: 'Public',
+    description: '',
+    capacity: '',
+    flyerUrl: '',
+  })
+
+  const [ticketTypes, setTicketTypes] = useState([
+    { name: 'General', price: '' }
+  ])
+
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleTicketChange = (index, field, value) => {
+    const updated = [...ticketTypes]
+    updated[index][field] = value
+    setTicketTypes(updated)
+  }
+
+  const addTicketType = () => {
+    setTicketTypes([...ticketTypes, { name: '', price: '' }])
+  }
+
+  const removeTicketType = (index) => {
+    setTicketTypes(ticketTypes.filter((_, i) => i !== index))
+  }
+
+  const handleSubmit = async (isDraft = false) => {
+    const user = auth.currentUser
+    if (!user) {
+      navigate('/login')
+      return
+    }
+
+    if (!formData.title || !formData.venue || !formData.startDate || !formData.category) {
+      setError('Please fill in event name, venue, date and category')
+      return
+    }
+
+    setLoading(true)
+    setError('')
+
+    try {
+      const newEventRef = push(ref(db, 'events'))
+      await set(newEventRef, {
+        ...formData,
+        ticketTypes,
+        hostId: user.uid,
+        hostName: user.displayName || 'Host',
+        status: isDraft ? 'draft' : 'live',
+        createdAt: new Date().toISOString(),
+        price: ticketTypes[0]?.price ? Number(ticketTypes[0].price) : 0,
+      })
+      navigate('/host/dashboard')
+    } catch (err) {
+      setError('Failed to create event. Please try again')
+      setLoading(false)
+    }
+  }
+
+  return (
+    <div>
+      <Navbar />
+      <div className="create-event-page">
+        <div className="ce-header">
+          <button className="ce-back" onClick={() => navigate('/host/dashboard')}>← Back</button>
+          <h1 className="ce-title">Create a new event</h1>
         </div>
-    );
-};
+
+        {error && <div className="ce-error">{error}</div>}
+
+        <div className="ce-grid">
+          <div className="ce-left">
+            <div className="ce-field">
+              <label>Event name</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Name of event"
+                value={formData.title}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="ce-field">
+              <label>Venue / Location</label>
+              <input
+                type="text"
+                name="venue"
+                placeholder="Where is the event?"
+                value={formData.venue}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="ce-row">
+              <div className="ce-field">
+                <label>Start date</label>
+                <input
+                  type="date"
+                  name="startDate"
+                  value={formData.startDate}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="ce-field">
+                <label>Start time</label>
+                <input
+                  type="time"
+                  name="startTime"
+                  value={formData.startTime}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="ce-row">
+              <div className="ce-field">
+                <label>End date</label>
+                <input
+                  type="date"
+                  name="endDate"
+                  value={formData.endDate}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="ce-field">
+                <label>End time</label>
+                <input
+                  type="time"
+                  name="endTime"
+                  value={formData.endTime}
+                  onChange={handleChange}
+                />
+              </div>
+            </div>
+
+            <div className="ce-row">
+              <div className="ce-field">
+                <label>Category</label>
+                <select name="category" value={formData.category} onChange={handleChange}>
+                  <option value="">Select category</option>
+                  {CATEGORIES.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="ce-field">
+                <label>Visibility</label>
+                <select name="visibility" value={formData.visibility} onChange={handleChange}>
+                  <option value="Public">Public</option>
+                  <option value="Private">Private</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="ce-field">
+              <label>Capacity</label>
+              <input
+                type="number"
+                name="capacity"
+                placeholder="200"
+                value={formData.capacity}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="ce-field">
+              <label>Description</label>
+              <textarea
+                name="description"
+                placeholder="Describe your event..."
+                value={formData.description}
+                onChange={handleChange}
+                rows={4}
+              />
+            </div>
+          </div>
+
+          <div className="ce-right">
+            <div className="ce-field">
+              <label>Event flyer URL</label>
+              <input
+                type="text"
+                name="flyerUrl"
+                placeholder="Paste image URL here"
+                value={formData.flyerUrl}
+                onChange={handleChange}
+              />
+              {formData.flyerUrl && (
+                <img src={formData.flyerUrl} alt="Flyer preview" className="ce-flyer-preview" />
+              )}
+            </div>
+
+            <div className="ce-field">
+              <label>Ticket types</label>
+              {ticketTypes.map((ticket, index) => (
+                <div key={index} className="ce-ticket-row">
+                  <input
+                    type="text"
+                    placeholder="Ticket name (e.g. General)"
+                    value={ticket.name}
+                    onChange={(e) => handleTicketChange(index, 'name', e.target.value)}
+                  />
+                  <input
+                    type="number"
+                    placeholder="Price (0 = Free)"
+                    value={ticket.price}
+                    onChange={(e) => handleTicketChange(index, 'price', e.target.value)}
+                  />
+                  {ticketTypes.length > 1 && (
+                    <button className="ce-remove-ticket" onClick={() => removeTicketType(index)}>✕</button>
+                  )}
+                </div>
+              ))}
+              <button className="ce-add-ticket" onClick={addTicketType}>+ Add ticket type</button>
+            </div>
+
+            <div className="ce-actions">
+              <button
+                className="ce-publish-btn"
+                onClick={() => handleSubmit(false)}
+                disabled={loading}
+              >
+                {loading ? 'Publishing...' : 'Publish event'}
+              </button>
+              <button
+                className="ce-draft-btn"
+                onClick={() => handleSubmit(true)}
+                disabled={loading}
+              >
+                Save as draft
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

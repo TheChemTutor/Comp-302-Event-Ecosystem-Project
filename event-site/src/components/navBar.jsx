@@ -24,7 +24,9 @@ function Navbar() {
 
   return (
     <nav className="navbar">
-      <Link to="/" className="navbar-logo">LogoHere</Link>
+      <Link to="/" className="navbar-logo">
+  <img src="/src/assets/event_horizon_logo.png" alt="Event Horizon" className="navbar-logo-img" />
+</Link>
 
       <div className="navbar-links">
         <Link to="/">Explore</Link>

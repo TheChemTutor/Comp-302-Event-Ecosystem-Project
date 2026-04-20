@@ -1,423 +1,160 @@
-.ticket-history {
-  background-color: #ede6da;
-  min-height: 844px;
-  min-width: 390px;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+.th-page {
+  background: #FFFBF0;
+  min-height: calc(100vh - 56px);
+  padding: 32px 40px;
 }
- 
-.ticket-history .rectangle {
-  background-color: #1b1205;
+
+.th-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1A1200;
+  margin-bottom: 20px;
+}
+
+.th-tabs {
+  display: flex;
+  border-bottom: 0.5px solid rgba(26,18,0,0.13);
+  margin-bottom: 24px;
+  background: #fff;
+  margin: 0 -40px 24px;
+  padding: 0 40px;
+}
+
+.th-tab {
+  font-size: 13px;
+  padding: 12px 18px;
+  color: #6b5200;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.th-tab-active {
+  color: #1A1200;
+  border-bottom-color: #FF6B00;
+  font-weight: 500;
+}
+
+.th-tab-count {
+  background: #FFF3C4;
+  color: #6b5200;
+  font-size: 11px;
+  padding: 1px 7px;
+  border-radius: 10px;
+}
+
+.th-list {
+  background: #fff;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 14px;
+  padding: 0 24px;
+}
+
+.th-item {
+  display: flex;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 0.5px solid rgba(26,18,0,0.08);
+  align-items: center;
+}
+
+.th-item:last-child {
+  border-bottom: none;
+}
+
+.th-thumb {
+  width: 64px;
   height: 64px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 390px;
+  border-radius: 10px;
+  flex-shrink: 0;
 }
- 
-.ticket-history .text-wrapper {
-  color: #f4d77b;
-  font-family: "Inter-Regular", Helvetica;
+
+.th-info {
+  flex: 1;
+}
+
+.th-event-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1A1200;
+  margin-bottom: 4px;
+}
+
+.th-event-meta {
+  font-size: 13px;
+  color: #6b5200;
+}
+
+.th-right {
+  text-align: right;
+}
+
+.th-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1200;
+  margin-bottom: 3px;
+}
+
+.th-ref {
+  font-size: 11px;
+  color: #6b5200;
+  font-family: monospace;
+  margin-bottom: 5px;
+}
+
+.th-badge {
+  font-size: 10px;
+  padding: 3px 9px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.th-badge-upcoming {
+  background: #fff0e0;
+  color: #FF6B00;
+}
+
+.th-badge-past {
+  background: #f0ede0;
+  color: #6b5200;
+}
+
+.th-view-btn {
+  background: transparent;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 20px;
+  padding: 7px 16px;
   font-size: 12px;
-  font-weight: 400;
-  left: 20px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 20px;
+  color: #1A1200;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  margin-left: 12px;
+  white-space: nowrap;
 }
- 
-.ticket-history .div {
-  color: #aaaaaa;
-  font-family: "Inter-Regular", Helvetica;
+
+.th-loading,
+.th-empty {
+  text-align: center;
+  padding: 60px;
+  color: #6b5200;
   font-size: 14px;
-  font-weight: 400;
-  left: 20px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 90px;
 }
- 
-.ticket-history .text-wrapper-2 {
-  color: #777777;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  left: 120px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 90px;
-}
- 
-.ticket-history .text-wrapper-3 {
-  color: #777777;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 14px;
-  font-weight: 400;
-  left: 190px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 90px;
-}
- 
-.ticket-history .img {
-  height: 488px;
-  left: 7px;
-  position: absolute;
-  top: 147px;
-  width: 375px;
-}
- 
-.ticket-history .text-wrapper-4 {
-  color: #888888;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 488px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-5 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 477px;
-  white-space: nowrap;
-}
- 
-.ticket-history .p {
-  color: #6b6b6b;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 465px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-6 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 447px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-7 {
-  color: #888888;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 367px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-8 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 356px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-9 {
-  color: #6b6b6b;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 346px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-10 {
-  color: #888888;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 245px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-11 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 233px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-12 {
-  color: #6b6b6b;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 221px;
-  white-space: nowrap;
-}
- 
-.ticket-history .text-wrapper-13 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 203px;
-  white-space: nowrap;
-}
- 
-.ticket-history .rectangle-2 {
-  height: 48px;
-  left: 25px;
-  position: absolute;
-  top: 203px;
-  width: 48px;
-}
- 
-.ticket-history .text-wrapper-14 {
-  color: #000000;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 15px;
-  font-weight: 400;
-  left: 80px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 328px;
-  white-space: nowrap;
-}
- 
-.ticket-history .rectangle-3 {
-  height: 48px;
-  left: 26px;
-  position: absolute;
-  top: 450px;
-  width: 48px;
-}
- 
-.ticket-history .rectangle-4 {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 138, 0, 1) 0%,
-    rgba(255, 211, 106, 1) 100%
-  );
-  height: 48px;
-  left: 26px;
-  position: absolute;
-  top: 328px;
-  width: 48px;
-}
- 
-.ticket-history .rectangle-5 {
-  background-color: #f3e6a3;
+
+.th-browse-btn {
+  background: #FF6B00;
+  color: #fff;
+  border: none;
   border-radius: 20px;
-  height: 22px;
-  left: 282px;
-  position: absolute;
-  top: 239px;
-  width: 70px;
-}
- 
-.ticket-history .rectangle-6 {
-  background-color: #f3e6a3;
-  border-radius: 20px;
-  height: 22px;
-  left: 281px;
-  position: absolute;
-  top: 351px;
-  width: 70px;
-}
- 
-.ticket-history .rectangle-7 {
-  background-color: #f3e6a3;
-  border-radius: 20px;
-  height: 22px;
-  left: 281px;
-  position: absolute;
-  top: 475px;
-  width: 70px;
-}
- 
-.ticket-history .text-wrapper-15 {
-  color: #8b6a00;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 292px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 244px;
-  white-space: nowrap;
-}
- 
-/* NOTE: text-wrapper-16 was missing from original CSS — added below */
-.ticket-history .text-wrapper-16 {
-  color: #8b6a00;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 293px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 356px;
-  white-space: nowrap;
-}
- 
-.ticket-history .rectangle-8 {
-  background-color: #d6d6d6;
-  border-radius: 20px;
-  height: 24px;
-  left: 25px;
-  position: absolute;
-  top: 262px;
-  width: 67px;
-}
- 
-.ticket-history .rectangle-9 {
-  background-color: #d6d6d6;
-  border-radius: 20px;
-  height: 24px;
-  left: 23px;
-  position: absolute;
-  top: 387px;
-  width: 67px;
-}
- 
-.ticket-history .rectangle-10 {
-  background-color: #d6d6d6;
-  border-radius: 20px;
-  height: 24px;
-  left: 21px;
-  position: absolute;
-  top: 512px;
-  width: 67px;
-}
- 
-.ticket-history .text-wrapper-17 {
-  color: #8b6a00;
-  font-family: "Inter-Regular", Helvetica;
-  font-size: 10px;
-  font-weight: 400;
-  left: 292px;
-  letter-spacing: 0;
-  line-height: normal;
-  position: absolute;
-  top: 480px;
-  white-space: nowrap;
-}
- 
-.ticket-history .line {
-  height: 1px;
-  left: 33px;
-  object-fit: cover;
-  position: absolute;
-  top: 305px;
-  width: 320px;
-}
- 
-.ticket-history .line-2 {
-  height: 1px;
-  left: 33px;
-  object-fit: cover;
-  position: absolute;
-  top: 421px;
-  width: 320px;
-}
- 
-.ticket-history .line-3 {
-  height: 1px;
-  left: 33px;
-  object-fit: cover;
-  position: absolute;
-  top: 552px;
-  width: 320px;
-}
- 
-/* NOTE: .icon and .icon-2 have off-screen left values from Figma export.
-   Fix these positions to match your actual design. */
-.ticket-history .icon {
-  height: 1px;
-  left: -1515px;
-  object-fit: cover;
-  position: absolute;
-  top: 1363px;
-  width: 1px;
-}
- 
-.ticket-history .icon-2 {
-  height: 1px;
-  left: -1535px;
-  object-fit: cover;
-  position: absolute;
-  top: 1646px;
-  width: 1px;
-}
- 
-.ticket-history .line-4 {
-  height: 1px;
-  left: 20px;
-  object-fit: cover;
-  position: absolute;
-  top: 111px;
-  width: 95px;
-}
- 
-.ticket-history .ellipse {
-  height: 32px;
-  left: 338px;
-  object-fit: cover;
-  position: absolute;
-  top: 16px;
-  width: 32px;
+  padding: 8px 20px;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 12px;
+  font-family: 'DM Sans', sans-serif;
 }

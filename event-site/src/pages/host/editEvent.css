@@ -1,0 +1,301 @@
+.ee-page {
+  background: #FFFBF0;
+  min-height: calc(100vh - 56px);
+  padding: 32px 40px;
+}
+
+.ee-loading {
+  text-align: center;
+  padding: 80px;
+  color: #6b5200;
+  background: #FFFBF0;
+  min-height: calc(100vh - 56px);
+}
+
+.ee-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.ee-back {
+  background: transparent;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: #1A1200;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ee-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1A1200;
+}
+
+.ee-tabs {
+  display: flex;
+  border-bottom: 0.5px solid rgba(26,18,0,0.13);
+  margin: 0 -40px 24px;
+  padding: 0 40px;
+  background: #fff;
+}
+
+.ee-tab {
+  font-size: 13px;
+  padding: 12px 18px;
+  color: #6b5200;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ee-tab-active {
+  color: #1A1200;
+  border-bottom-color: #FF6B00;
+  font-weight: 500;
+}
+
+.ee-tab-danger {
+  color: #a32d2d;
+  margin-left: auto;
+}
+
+.ee-error {
+  background: #fcebeb;
+  color: #a32d2d;
+  border: 0.5px solid #f09595;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.ee-success {
+  background: #d4f7d4;
+  color: #1a5c1a;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+
+.ee-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.ee-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 16px;
+}
+
+.ee-field label {
+  font-size: 12px;
+  color: #6b5200;
+  font-weight: 500;
+}
+
+.ee-field input,
+.ee-field select,
+.ee-field textarea {
+  background: #fff;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: #1A1200;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ee-field input:focus,
+.ee-field select:focus,
+.ee-field textarea:focus {
+  border-color: #FF6B00;
+}
+
+.ee-field textarea {
+  resize: vertical;
+}
+
+.ee-warn {
+  font-size: 11px;
+  color: #FF6B00;
+  margin-top: 3px;
+}
+
+.ee-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.ee-flyer-preview {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.ee-tickets {
+  max-width: 600px;
+}
+
+.ee-section-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1200;
+  margin-bottom: 14px;
+}
+
+.ee-ticket-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ee-ticket-row input {
+  flex: 1;
+  background: #fff;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 13px;
+  color: #1A1200;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+}
+
+.ee-remove-ticket {
+  background: #fcebeb;
+  color: #a32d2d;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.ee-add-ticket {
+  background: transparent;
+  border: 0.5px dashed rgba(26,18,0,0.2);
+  border-radius: 8px;
+  padding: 8px;
+  width: 100%;
+  font-size: 13px;
+  color: #FF6B00;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  margin-top: 4px;
+}
+
+.ee-danger {
+  max-width: 500px;
+  background: #fff;
+  border: 0.5px solid #f09595;
+  border-radius: 14px;
+  padding: 24px;
+}
+
+.ee-danger h3 {
+  font-size: 16px;
+  font-weight: 500;
+  color: #a32d2d;
+  margin-bottom: 8px;
+}
+
+.ee-danger p {
+  font-size: 13px;
+  color: #6b5200;
+  margin-bottom: 16px;
+  line-height: 1.6;
+}
+
+.ee-cancel-btn {
+  background: #fcebeb;
+  color: #a32d2d;
+  border: 0.5px solid #f09595;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ee-confirm input {
+  width: 100%;
+  background: #fff;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-size: 13px;
+  color: #1A1200;
+  font-family: 'DM Sans', sans-serif;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+}
+
+.ee-confirm-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.ee-back-btn {
+  background: transparent;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 8px;
+  padding: 9px 16px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  color: #1A1200;
+}
+
+.ee-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.ee-save-btn {
+  background: #FF6B00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.ee-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ee-preview-btn {
+  background: transparent;
+  color: #1A1200;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
