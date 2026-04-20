@@ -117,3 +117,12 @@
   color: var(--primary);
   text-decoration: none;
 }
+.login-error {
+  background: #fcebeb;
+  color: #a32d2d;
+  border: 0.5px solid #f09595;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  margin-bottom: 16px;
+}

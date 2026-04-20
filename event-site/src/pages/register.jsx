@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { ref, set } from 'firebase/database'
-import { auth, db } from '../database/firebaseConfig'
+import { auth, db } from '../../database/firebaseConfig'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router-dom'
