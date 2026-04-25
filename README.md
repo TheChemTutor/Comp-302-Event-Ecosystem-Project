@@ -1,6 +1,6 @@
 # Event Horizon - Firebase Database
 
-## 🔥 Firebase Services Configured
+## Firebase Services Configured
 
 | Service | Status | Purpose |
 |---------|--------|---------|
@@ -14,5 +14,5 @@
 
 ### 1. Clone repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/event-backend.git
+git clone https://github.com/motheobasinyi/event-backend.git
 cd event-backend
