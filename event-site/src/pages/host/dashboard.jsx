@@ -1,29 +1,28 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { auth, db } from '../../../database/firebaseConfig'
-import { ref, get } from 'firebase/database'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthChange } from '../../services/auth'
+import { getEventsByHost } from '../../services/events'
+import { getAllTickets } from '../../services/tickets'
 import Navbar from '../../components/Navbar'
 import './dashboard.css'
 
 export default function Dashboard() {
   const navigate = useNavigate()
-  const [user, setUser] = useState(null)
   const [events, setEvents] = useState([])
   const [stats, setStats] = useState({
     totalEvents: 0,
     totalTickets: 0,
     totalRevenue: 0,
+    activeEvents: 0
   })
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (u) => {
+    const unsubscribe = onAuthChange(async (u) => {
       if (!u) {
         navigate('/login')
         return
       }
-      setUser(u)
       await fetchHostData(u.uid)
     })
     return () => unsubscribe()
@@ -31,32 +30,26 @@ export default function Dashboard() {
 
   const fetchHostData = async (userId) => {
     try {
-      const eventsSnap = await get(ref(db, 'events'))
-      const ticketsSnap = await get(ref(db, 'tickets'))
-
-      let hostEvents = []
-      if (eventsSnap.exists()) {
-        hostEvents = Object.entries(eventsSnap.val())
-          .filter(([id, e]) => e.hostId === userId)
-          .map(([id, e]) => ({ id, ...e }))
-      }
+      const [hostEvents, allTickets] = await Promise.all([
+        getEventsByHost(userId),
+        getAllTickets()
+      ])
 
       let totalTickets = 0
       let totalRevenue = 0
-      if (ticketsSnap.exists()) {
-        const allTickets = Object.values(ticketsSnap.val())
-        hostEvents.forEach(event => {
-          const eventTickets = allTickets.filter(t => t.eventId === event.id)
-          totalTickets += eventTickets.length
-          totalRevenue += eventTickets.reduce((sum, t) => sum + (Number(t.price) || 0), 0)
-        })
-      }
+
+      hostEvents.forEach(event => {
+        const eventTickets = allTickets.filter(t => t.eventId === event.id)
+        totalTickets += eventTickets.length
+        totalRevenue += eventTickets.reduce((sum, t) => sum + (Number(t.price) || 0), 0)
+      })
 
       setEvents(hostEvents)
       setStats({
         totalEvents: hostEvents.length,
         totalTickets,
         totalRevenue,
+        activeEvents: hostEvents.filter(e => getStatus(e) === 'Live').length
       })
     } catch (err) {
       console.error('Failed to fetch host data:', err)
@@ -107,9 +100,7 @@ export default function Dashboard() {
               </div>
               <div className="db-stat-card">
                 <p className="db-stat-label">Active events</p>
-                <p className="db-stat-val">
-                  {events.filter(e => getStatus(e) === 'Live').length}
-                </p>
+                <p className="db-stat-val">{stats.activeEvents}</p>
               </div>
             </div>
 

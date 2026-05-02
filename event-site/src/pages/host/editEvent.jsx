@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { auth, db } from '../../../database/firebaseConfig'
-import { ref, get, update, remove } from 'firebase/database'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthChange } from '../../services/auth'
+import { getEventById, updateEvent, deleteEvent } from '../../services/events'
 import Navbar from '../../components/Navbar'
 import './editEvent.css'
 
@@ -37,7 +36,7 @@ export default function EditEvent() {
   const [ticketTypes, setTicketTypes] = useState([])
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (u) => {
+    const unsubscribe = onAuthChange(async (u) => {
       if (!u) {
         navigate('/login')
         return
@@ -49,9 +48,8 @@ export default function EditEvent() {
 
   const fetchEvent = async () => {
     try {
-      const snap = await get(ref(db, 'events/' + id))
-      if (snap.exists()) {
-        const data = snap.val()
+      const data = await getEventById(id)
+      if (data) {
         setFormData({
           title: data.title || '',
           venue: data.venue || '',
@@ -99,7 +97,7 @@ export default function EditEvent() {
     setError('')
     setSuccess('')
     try {
-      await update(ref(db, 'events/' + id), {
+      await updateEvent(id, {
         ...formData,
         ticketTypes,
         price: ticketTypes[0]?.price ? Number(ticketTypes[0].price) : 0,
@@ -113,16 +111,16 @@ export default function EditEvent() {
     }
   }
 
-  const handleCancelEvent = async () => {
+  const handleDeleteEvent = async () => {
     if (cancelInput !== formData.title) {
       setError('Event name does not match. Please type the exact event name to confirm.')
       return
     }
     try {
-      await remove(ref(db, 'events/' + id))
+      await deleteEvent(id)
       navigate('/host/dashboard')
     } catch (err) {
-      setError('Failed to cancel event. Please try again.')
+      setError('Failed to delete event. Please try again.')
     }
   }
 
@@ -172,7 +170,9 @@ export default function EditEvent() {
                 <div className="ee-field">
                   <label>Start date</label>
                   <input type="date" name="startDate" value={formData.startDate} onChange={handleChange} />
-                  {formData.startDate && <p className="ee-warn">Changing the date will affect registered attendees</p>}
+                  {formData.startDate && (
+                    <p className="ee-warn">Changing the date will affect registered attendees</p>
+                  )}
                 </div>
                 <div className="ee-field">
                   <label>Start time</label>
@@ -193,7 +193,9 @@ export default function EditEvent() {
                 <div className="ee-field">
                   <label>Category</label>
                   <select name="category" value={formData.category} onChange={handleChange}>
-                    {CATEGORIES.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+                    {CATEGORIES.map(cat => (
+                      <option key={cat} value={cat}>{cat}</option>
+                    ))}
                   </select>
                 </div>
                 <div className="ee-field">
@@ -216,7 +218,13 @@ export default function EditEvent() {
             <div className="ee-right">
               <div className="ee-field">
                 <label>Event flyer URL</label>
-                <input type="text" name="flyerUrl" value={formData.flyerUrl} onChange={handleChange} placeholder="Paste image URL" />
+                <input
+                  type="text"
+                  name="flyerUrl"
+                  value={formData.flyerUrl}
+                  onChange={handleChange}
+                  placeholder="Paste image URL"
+                />
                 {formData.flyerUrl && (
                   <img src={formData.flyerUrl} alt="Flyer preview" className="ee-flyer-preview" />
                 )}
@@ -243,11 +251,18 @@ export default function EditEvent() {
                   onChange={(e) => handleTicketChange(index, 'price', e.target.value)}
                 />
                 {ticketTypes.length > 1 && (
-                  <button className="ee-remove-ticket" onClick={() => removeTicketType(index)}>✕</button>
+                  <button
+                    className="ee-remove-ticket"
+                    onClick={() => removeTicketType(index)}
+                  >
+                    ✕
+                  </button>
                 )}
               </div>
             ))}
-            <button className="ee-add-ticket" onClick={addTicketType}>+ Add ticket type</button>
+            <button className="ee-add-ticket" onClick={addTicketType}>
+              + Add ticket type
+            </button>
           </div>
         )}
 
@@ -269,8 +284,15 @@ export default function EditEvent() {
                   placeholder="Type event name here"
                 />
                 <div className="ee-confirm-actions">
-                  <button className="ee-cancel-btn" onClick={handleCancelEvent}>Confirm cancel</button>
-                  <button className="ee-back-btn" onClick={() => setShowCancelConfirm(false)}>Go back</button>
+                  <button className="ee-cancel-btn" onClick={handleDeleteEvent}>
+                    Confirm cancel
+                  </button>
+                  <button
+                    className="ee-back-btn"
+                    onClick={() => setShowCancelConfirm(false)}
+                  >
+                    Go back
+                  </button>
                 </div>
               </div>
             )}
@@ -278,15 +300,16 @@ export default function EditEvent() {
         )}
 
         {activeTab !== 'Danger zone' && (
-          <div className="ee-footer">
-            <button className="ee-save-btn" onClick={handleSave} disabled={saving}>
-              {saving ? 'Saving...' : 'Save changes'}
-            </button>
-            <button className="ee-preview-btn" onClick={() => navigate(`/events/${id}`)}>
-              Preview
-            </button>
-          </div>
-        )}
+  <div className="ee-footer">
+    <button
+      className="ee-save-btn"
+      onClick={handleSave}
+      disabled={saving}
+    >
+      {saving ? 'Saving...' : 'Save changes'}
+    </button>
+  </div>
+)}
       </div>
     </div>
   )

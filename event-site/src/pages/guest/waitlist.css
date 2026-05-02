@@ -1,0 +1,157 @@
+.wl-page {
+  background: #FFFBF0;
+  min-height: calc(100vh - 56px);
+  padding: 32px 40px;
+}
+
+.wl-header {
+  margin-bottom: 24px;
+}
+
+.wl-title {
+  font-family: 'Fraunces', serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: #1A1200;
+  margin-bottom: 4px;
+}
+
+.wl-sub {
+  font-size: 13px;
+  color: #6b5200;
+}
+
+.wl-loading,
+.wl-empty {
+  text-align: center;
+  padding: 60px;
+  color: #6b5200;
+  font-size: 14px;
+}
+
+.wl-empty p {
+  margin-bottom: 16px;
+}
+
+.wl-browse-btn {
+  background: #FF6B00;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 20px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.wl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.wl-card {
+  background: #fff;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 14px;
+  padding: 16px 20px;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.wl-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.wl-info {
+  flex: 1;
+}
+
+.wl-event-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: #1A1200;
+  margin-bottom: 3px;
+}
+
+.wl-event-meta {
+  font-size: 12px;
+  color: #6b5200;
+  margin-bottom: 3px;
+}
+
+.wl-event-price {
+  font-size: 12px;
+  color: #FF6B00;
+  font-weight: 500;
+}
+
+.wl-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+.wl-position {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.wl-position-num {
+  font-size: 18px;
+  font-weight: 500;
+  color: #1A1200;
+}
+
+.wl-position-label {
+  font-size: 11px;
+  color: #6b5200;
+}
+
+.wl-badge {
+  font-size: 10px;
+  background: #FFF3C4;
+  color: #6d5a00;
+  padding: 3px 10px;
+  border-radius: 10px;
+}
+
+.wl-leave-btn {
+  background: #fcebeb;
+  color: #a32d2d;
+  border: 0.5px solid #f09595;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}
+
+.wl-leave-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .wl-page {
+    padding: 24px 20px;
+  }
+
+  .wl-card {
+    flex-wrap: wrap;
+  }
+
+  .wl-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

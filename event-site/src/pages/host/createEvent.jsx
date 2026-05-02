@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ref, push, set } from 'firebase/database'
-import { auth, db } from '../../../database/firebaseConfig'
+import { getCurrentUser } from '../../services/auth'
+import { createEvent } from '../../services/events'
 import Navbar from '../../components/Navbar'
 import './createEvent.css'
 
@@ -50,7 +50,7 @@ export default function CreateEvent() {
   }
 
   const handleSubmit = async (isDraft = false) => {
-    const user = auth.currentUser
+    const user = getCurrentUser()
     if (!user) {
       navigate('/login')
       return
@@ -65,16 +65,12 @@ export default function CreateEvent() {
     setError('')
 
     try {
-      const newEventRef = push(ref(db, 'events'))
-      await set(newEventRef, {
+      await createEvent({
         ...formData,
         ticketTypes,
-        hostId: user.uid,
-        hostName: user.displayName || 'Host',
         status: isDraft ? 'draft' : 'live',
-        createdAt: new Date().toISOString(),
         price: ticketTypes[0]?.price ? Number(ticketTypes[0].price) : 0,
-      })
+      }, user)
       navigate('/host/dashboard')
     } catch (err) {
       setError('Failed to create event. Please try again')
@@ -212,7 +208,11 @@ export default function CreateEvent() {
                 onChange={handleChange}
               />
               {formData.flyerUrl && (
-                <img src={formData.flyerUrl} alt="Flyer preview" className="ce-flyer-preview" />
+                <img
+                  src={formData.flyerUrl}
+                  alt="Flyer preview"
+                  className="ce-flyer-preview"
+                />
               )}
             </div>
 
@@ -233,11 +233,18 @@ export default function CreateEvent() {
                     onChange={(e) => handleTicketChange(index, 'price', e.target.value)}
                   />
                   {ticketTypes.length > 1 && (
-                    <button className="ce-remove-ticket" onClick={() => removeTicketType(index)}>✕</button>
+                    <button
+                      className="ce-remove-ticket"
+                      onClick={() => removeTicketType(index)}
+                    >
+                      ✕
+                    </button>
                   )}
                 </div>
               ))}
-              <button className="ce-add-ticket" onClick={addTicketType}>+ Add ticket type</button>
+              <button className="ce-add-ticket" onClick={addTicketType}>
+                + Add ticket type
+              </button>
             </div>
 
             <div className="ce-actions">

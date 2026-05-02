@@ -12,6 +12,17 @@
   color: #FFD600;
   font-size: 18px;
   font-weight: 600;
+  align-items: center;
+  text-decoration: none;
+}
+
+.navbar-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  background: #FFF3C4;
+  border-radius: 20px;
+  padding: 2px 8px;
 }
 
 .navbar-links {
@@ -55,13 +66,6 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-}
-.navbar-logo {
-  font-family: 'Fraunces', serif;
-  color: #FFD600;
-  font-size: 18px;
-  font-weight: 600;
-  text-decoration: none;
 }
 
 .navbar-user {
@@ -114,8 +118,95 @@
   border-top: 0.5px solid rgba(26,18,0,0.08);
   margin-top: 4px;
 }
-.navbar-logo-img {
-  height: 32px;
-  width: auto;
-  object-fit: contain;
+
+.navbar-cart {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+}
+
+.navbar-cart-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #FF6B00;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 500;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.navbar-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: rgba(255,255,255,0.8);
+  border-radius: 2px;
+}
+
+.navbar-mobile-menu {
+  background: #1A1200;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  z-index: 200;
+  border-top: 0.5px solid rgba(255,255,255,0.1);
+}
+
+.navbar-mobile-menu a,
+.navbar-mobile-menu button {
+  padding: 12px 24px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.navbar-mobile-menu a:hover,
+.navbar-mobile-menu button:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.navbar-mobile-menu button {
+  color: #FF6B00;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .navbar-links {
+    display: none;
+  }
+
+  .navbar-username {
+    display: none;
+  }
+
+  .navbar-hamburger {
+    display: flex;
+  }
 }
