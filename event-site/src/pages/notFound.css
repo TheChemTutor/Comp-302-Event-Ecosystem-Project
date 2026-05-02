@@ -1,0 +1,60 @@
+.nf-container {
+  text-align: center;
+  padding: 80px 40px;
+  background: #FFFBF0;
+  min-height: calc(100vh - 56px);
+}
+
+.nf-code {
+  font-family: 'Fraunces', serif;
+  font-size: 96px;
+  font-weight: 600;
+  color: #FFF3C4;
+  -webkit-text-stroke: 2px rgba(26,18,0,0.08);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.nf-title {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: #1A1200;
+  margin-bottom: 10px;
+}
+
+.nf-sub {
+  font-size: 14px;
+  color: #6b5200;
+  margin-bottom: 28px;
+  line-height: 1.65;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nf-buttons {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+.btn-dark {
+  background: #1A1200;
+  color: #FFD600;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #1A1200;
+  padding: 10px 24px;
+  border-radius: 20px;
+  font-size: 13px;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  text-decoration: none;
+}

@@ -1,0 +1,253 @@
+/* Hero */
+.hero {
+  background: #2c1111;
+  padding: 40px 40px 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.hero-title {
+  color: #ffffff;
+  font-size: clamp(24px, 4vw, 48px);
+  font-weight: 500;
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.hero-subtitle {
+  color: rgba(255,255,255,0.8);
+  font-size: 14px;
+  margin-bottom: 24px;
+}
+
+.search-bar {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  height: 52px;
+  width: min(600px, 100%);
+  padding: 0 10px 0 24px;
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif;
+  flex: 1;
+  min-width: 0;
+}
+
+.search-bar input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.btn-search {
+  background: #FF6B00;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 13px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  flex-shrink: 0;
+}
+
+/* Body */
+.home-body {
+  background: #FFFBF0;
+  padding: 20px 40px 40px;
+}
+
+.category-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+}
+
+.category-row::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(26,18,0,0.13);
+  color: #6b5200;
+  background: #fff;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.chip-active {
+  background: #1A1200;
+  color: #FFD600;
+  border-color: #1A1200;
+}
+
+/* Grid */
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.event-card {
+  border: 0.5px solid rgba(26,18,0,0.13);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.event-card:hover {
+  transform: translateY(-2px);
+}
+
+.event-img {
+  height: 120px;
+  display: flex;
+  align-items: flex-end;
+  padding: 10px;
+  position: relative;
+}
+
+.event-img img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.event-img-music { background: linear-gradient(135deg, #ff6b00, #ffb347); }
+.event-img-tech { background: linear-gradient(135deg, #ffd600, #ff6b00); }
+.event-img-sports { background: linear-gradient(135deg, #1a1200, #4a3800); }
+.event-img-food { background: linear-gradient(135deg, #854f0b, #ba7517); }
+.event-img-arts { background: linear-gradient(135deg, #3a1a00, #7a3a00); }
+.event-img-networking { background: linear-gradient(135deg, #0f4c75, #1b6ca8); }
+.event-img-default { background: linear-gradient(135deg, #6b5200, #c4a882); }
+
+.event-tag {
+  font-size: 10px;
+  background: rgba(255,255,255,0.22);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.event-body {
+  padding: 12px 14px;
+}
+
+.event-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1A1200;
+  margin-bottom: 3px;
+}
+
+.event-meta {
+  font-size: 12px;
+  color: #6b5200;
+  margin-bottom: 10px;
+}
+
+.event-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.event-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #FF6B00;
+}
+
+.event-reg-btn {
+  font-size: 11px;
+  background: #FF6B00;
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+.event-reg-btn-past {
+  background: #f0ede0;
+  color: #6b5200;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.home-loading,
+.home-empty {
+  text-align: center;
+  color: #6b5200;
+  padding: 40px;
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .events-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 32px 20px 40px;
+  }
+
+  .home-body {
+    padding: 16px 20px 32px;
+  }
+
+  .events-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-title {
+    font-size: 24px;
+  }
+}
+.following-section {
+  margin-bottom: 32px;
+}
+
+.following-title {
+  font-family: 'Fraunces', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1A1200;
+  margin-bottom: 14px;
+}
+
+.following-divider {
+  border-top: 0.5px solid rgba(26,18,0,0.13);
+  margin-top: 28px;
+}

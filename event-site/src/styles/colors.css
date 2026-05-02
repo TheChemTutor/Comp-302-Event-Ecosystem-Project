@@ -1,1 +1,9 @@
-/* placeholder
+/* Global colour palette — do not change these values */
+:root {
+  --bg: #FFFBF0;
+  --surface: #FFF3C4;
+  --accent: #FFD600;
+  --primary: #FF6B00;
+  --text: #1A1200;
+  --muted: #6b5200;
+}
