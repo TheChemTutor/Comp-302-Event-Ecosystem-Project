@@ -186,3 +186,16 @@
     display: none;
   }
 }
+
+.al-scanner-btn {
+  background: #1A1200;
+  color: #FFD600;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  white-space: nowrap;
+}

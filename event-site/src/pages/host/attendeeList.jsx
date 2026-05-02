@@ -107,14 +107,17 @@ export default function AttendeeList() {
       <Navbar />
       <div className="al-page">
         <div className="al-header">
-          <button className="al-back" onClick={() => navigate('/host/dashboard')}>← Back</button>
-          <div>
-            <h1 className="al-title">{event?.title || 'Attendees'}</h1>
-            <p className="al-sub">
-              {attendees.length} tickets sold · {checkedInCount} checked in
-            </p>
-          </div>
-        </div>
+  <button className="al-back" onClick={() => navigate('/host/dashboard')}>← Back</button>
+  <div style={{ flex: 1 }}>
+    <h1 className="al-title">{event?.title || 'Attendees'}</h1>
+    <p className="al-sub">
+      {attendees.length} tickets sold · {checkedInCount} checked in
+    </p>
+  </div>
+  <button className="al-scanner-btn" onClick={() => navigate(`/host/scanner/${id}`)}>
+    📷 Scan QR
+  </button>
+</div>
 
         <div className="al-toolbar">
           <input
