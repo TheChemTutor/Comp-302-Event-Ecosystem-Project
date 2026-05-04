@@ -80,7 +80,7 @@ function EventDetail() {
 
   const isPastEvent = () => {
     if (!event?.startDate) return false
-    return new Date(event.startDate) < new Date()
+    new Date(event.endDate || event.startDate)
   }
 
   const calculateTotal = () => {

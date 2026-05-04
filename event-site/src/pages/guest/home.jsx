@@ -75,7 +75,7 @@ useEffect(() => {
 
   const isPast = (event) => {
     if (!event.startDate) return false
-    return new Date(event.startDate) < new Date()
+    new Date(event.endDate || event.startDate)
   }
 
   return (

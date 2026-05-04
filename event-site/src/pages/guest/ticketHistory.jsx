@@ -66,7 +66,7 @@ export default function TicketHistory() {
     const event = getEventForTicket(ticket)
     if (!event) return false
     const dateStr = event.startDate || event.date
-    return new Date(dateStr) >= new Date()
+    new Date(event.endDate || event.startDate)
   }
 
   const handleCancelTicket = async (ticketId) => {
