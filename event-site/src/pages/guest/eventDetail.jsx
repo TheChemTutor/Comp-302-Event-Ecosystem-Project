@@ -405,28 +405,20 @@ function EventDetail() {
         {!type.price || Number(type.price) === 0 ? 'Free' : `P${type.price}`}
       </span>
     </div>
-    {isGroup ? (
-      <div className="ed-qty">
-        <button onClick={() => updateQty(index, -1)}>−</button>
-        <span>{ticketSelections[index] || 0}</span>
-        <button onClick={() => updateQty(index, 1)}>+</button>
-      </div>
-    ) : (
-      <div className="ed-individual-select">
-        <label className="ed-individual-toggle">
-          <input
-            type="checkbox"
-            checked={(ticketSelections[index] || 0) > 0}
-            onChange={(e) => {
-              const updated = [...ticketSelections]
-              updated[index] = e.target.checked ? 1 : 0
-              setTicketSelections(updated)
-            }}
-          />
-          <span>{(ticketSelections[index] || 0) > 0 ? 'Selected' : 'Select'}</span>
-        </label>
-      </div>
-    )}
+    <div className="ed-individual-select">
+      <label className="ed-individual-toggle">
+        <input
+          type="checkbox"
+          checked={(ticketSelections[index] || 0) > 0}
+          onChange={(e) => {
+            const updated = [...ticketSelections]
+            updated[index] = e.target.checked ? 1 : 0
+            setTicketSelections(updated)
+          }}
+        />
+        <span>{(ticketSelections[index] || 0) > 0 ? 'Selected' : 'Select'}</span>
+      </label>
+    </div>
   </div>
 ))}
 
