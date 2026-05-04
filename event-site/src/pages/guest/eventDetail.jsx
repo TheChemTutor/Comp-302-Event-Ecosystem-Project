@@ -398,20 +398,37 @@ function EventDetail() {
                 )}
 
                 {ticketList.map((type, index) => (
-                  <div key={index} className="ed-ticket-type">
-                    <div className="ed-ticket-top">
-                      <span className="ed-ticket-name">{type.name}</span>
-                      <span className="ed-ticket-price">
-                        {!type.price || Number(type.price) === 0 ? 'Free' : `P${type.price}`}
-                      </span>
-                    </div>
-                    <div className="ed-qty">
-                      <button onClick={() => updateQty(index, -1)}>−</button>
-                      <span>{ticketSelections[index] || 0}</span>
-                      <button onClick={() => updateQty(index, 1)}>+</button>
-                    </div>
-                  </div>
-                ))}
+  <div key={index} className="ed-ticket-type">
+    <div className="ed-ticket-top">
+      <span className="ed-ticket-name">{type.name}</span>
+      <span className="ed-ticket-price">
+        {!type.price || Number(type.price) === 0 ? 'Free' : `P${type.price}`}
+      </span>
+    </div>
+    {isGroup ? (
+      <div className="ed-qty">
+        <button onClick={() => updateQty(index, -1)}>−</button>
+        <span>{ticketSelections[index] || 0}</span>
+        <button onClick={() => updateQty(index, 1)}>+</button>
+      </div>
+    ) : (
+      <div className="ed-individual-select">
+        <label className="ed-individual-toggle">
+          <input
+            type="checkbox"
+            checked={(ticketSelections[index] || 0) > 0}
+            onChange={(e) => {
+              const updated = [...ticketSelections]
+              updated[index] = e.target.checked ? 1 : 0
+              setTicketSelections(updated)
+            }}
+          />
+          <span>{(ticketSelections[index] || 0) > 0 ? 'Selected' : 'Select'}</span>
+        </label>
+      </div>
+    )}
+  </div>
+))}
 
                 <div className="ed-total">
                   Total: <strong>{total === 0 ? 'Free' : `P${total}`}</strong>
