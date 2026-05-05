@@ -73,11 +73,12 @@ useEffect(() => {
     navigate(`/search?q=${search}`)
   }
 
-  const isPast = (event) => {
-    if (!event.startDate) return false
-    new Date(event.endDate || event.startDate)
-  }
-
+ const isPast = (event) => {
+  const endStr = event.endDate || event.startDate
+  if (!endStr) return false
+  const endDate = new Date(endStr + 'T23:59:59')
+  return endDate < new Date()
+}
   return (
     <div>
       <Navbar />

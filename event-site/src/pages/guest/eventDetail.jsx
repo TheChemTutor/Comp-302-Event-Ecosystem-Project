@@ -78,11 +78,12 @@ function EventDetail() {
     fetchEvent()
   }, [id])
 
-  const isPastEvent = () => {
-    if (!event?.startDate) return false
-    new Date(event.endDate || event.startDate)
-  }
-
+ const isPastEvent = (event) => {
+  const endStr = event.endDate || event.startDate
+  if (!endStr) return false
+  const endDate = new Date(endStr + 'T23:59:59')
+  return endDate < new Date()
+}
   const calculateTotal = () => {
     if (event?.ticketTypes && event.ticketTypes.length > 0) {
       return event.ticketTypes.reduce((sum, type, index) => {

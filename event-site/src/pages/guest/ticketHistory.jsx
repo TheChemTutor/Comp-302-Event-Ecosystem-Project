@@ -62,12 +62,14 @@ export default function TicketHistory() {
     return events[ticket.eventId] || null
   }
 
-  const isUpcoming = (ticket) => {
-    const event = getEventForTicket(ticket)
-    if (!event) return false
-    const dateStr = event.startDate || event.date
-    new Date(event.endDate || event.startDate)
-  }
+ const isUpcoming = (ticket) => {
+  const event = getEventForTicket(ticket)
+  if (!event) return false
+  const endStr = event.endDate || event.startDate
+  if (!endStr) return false
+  const endDate = new Date(endStr + 'T23:59:59')
+  return endDate >= new Date()
+}
 
   const handleCancelTicket = async (ticketId) => {
     if (!window.confirm('Are you sure you want to cancel this ticket? This cannot be undone.')) return
