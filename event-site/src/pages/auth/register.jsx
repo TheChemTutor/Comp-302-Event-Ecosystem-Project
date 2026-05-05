@@ -32,7 +32,18 @@ function Register() {
       setLoading(false)
       return
     }
+    if (!email || !password) {
+  setError('Please fill in all fields')
+  setLoading(false)
+  return
+}
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+if (!emailRegex.test(email)) {
+  setError('Please enter a valid email address')
+  setLoading(false)
+  return
+}
     try {
       await registerWithEmail(formData)
       navigate('/')

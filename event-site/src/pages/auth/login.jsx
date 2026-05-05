@@ -16,10 +16,17 @@ function Login() {
     setLoading(true)
 
     if (!email || !password) {
-      setError('Please fill in all fields')
-      setLoading(false)
-      return
-    }
+  setError('Please fill in all fields')
+  setLoading(false)
+  return
+}
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+if (!emailRegex.test(email)) {
+  setError('Please enter a valid email address')
+  setLoading(false)
+  return
+}
 
     try {
       await loginWithEmail(email, password)
