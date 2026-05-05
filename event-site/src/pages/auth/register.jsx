@@ -23,36 +23,37 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = async () => {
-    setError('')
-    setLoading(true)
+ const handleSubmit = async () => {
+  setError('')
+  setLoading(true)
 
-    if (!formData.fullName || !formData.email || !formData.dob || !formData.gender || !formData.phone || !formData.password) {
-      setError('Please fill in all fields')
-      setLoading(false)
-      return
-    }
-   
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-if (!emailRegex.test(email)) {
-  setError('Please enter a valid email address')
-  setLoading(false)
-  return
-}
-    try {
-      await registerWithEmail(formData)
-      navigate('/')
-    } catch (err) {
-      if (err.code === 'auth/email-already-in-use') {
-        setError('An account with this email already exists')
-      } else if (err.code === 'auth/weak-password') {
-        setError('Password must be at least 6 characters')
-      } else {
-        setError('Something went wrong. Please try again')
-      }
-      setLoading(false)
-    }
+  if (!formData.fullName || !formData.email || !formData.dob || !formData.gender || !formData.phone || !formData.password) {
+    setError('Please fill in all fields')
+    setLoading(false)
+    return
   }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  if (!emailRegex.test(formData.email)) {
+    setError('Please enter a valid email address')
+    setLoading(false)
+    return
+  }
+
+  try {
+    await registerWithEmail(formData)
+    navigate('/')
+  } catch (err) {
+    if (err.code === 'auth/email-already-in-use') {
+      setError('An account with this email already exists')
+    } else if (err.code === 'auth/weak-password') {
+      setError('Password must be at least 6 characters')
+    } else {
+      setError('Something went wrong. Please try again')
+    }
+    setLoading(false)
+  }
+}
 
   return (
     <div>
