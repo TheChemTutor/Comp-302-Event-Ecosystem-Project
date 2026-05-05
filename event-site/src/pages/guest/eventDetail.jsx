@@ -255,7 +255,7 @@ function EventDetail() {
   if (!event) return null
 
   const total = calculateTotal()
-  const past = isPastEvent()
+  const past = isPastEvent(event)
 
   const ticketList = event.ticketTypes && event.ticketTypes.length > 0
     ? event.ticketTypes
